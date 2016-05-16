@@ -1,28 +1,5 @@
 var Person = require('../models/person');
-/*
-module.exports = function(req, res, next) {
-	//res.send('Thank you!');
-  console.log('post');
-  Person.findOne({idname:req.body.idname}, function(err, user) {
-		if (!err) console.log('The idname that you chose has already been taken.');
 
-    Person.findOne({username:req.body.username}, function(err, user) {
-  		if (!err) console.log('The username that you chose has already been taken.');
-  	});
-	});
-	var person = new Person({
-		idname: req.body.idname,
-		username: req.body.username,
-    password: req.body.password
-	});
-	person.save(function(err){
-		if (err) throw err;
-		console.log('person saved!');
-    req.session._id = person._id;
-    res.redirect('/member');
-  });
-};
-*/
 module.exports = function(req, res, next) {
 	//res.send('Thank you!');
   var b_checker = true;
@@ -45,6 +22,7 @@ module.exports = function(req, res, next) {
         		if (err) throw err;
         		console.log('person saved!');
             req.session._id = person._id;
+            req.session.idname = person.idname;
             res.json({signup_status: 1 , response: '/member'});
           });
         }

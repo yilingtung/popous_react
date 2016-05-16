@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
 		<link rel="icon" type="image/png" href="assets/img/favicon.ico" />
 	</head>
-	<body>
+	<body onresize="resize()">
 <div class="wrapper">
     <div class="box">
         <div class="row row-offcanvas row-offcanvas-left">
@@ -23,7 +23,11 @@
                 <div id="userphoto-div">
                     <a id="userphoto-setting"  href="#editModal" role="button" data-toggle="modal">
                       <span class="roll"></span>
-                      <img src="assets/img/<%=user['imgname']%>.jpg" id="userphoto" class="img-responsive displayed" alt="">
+											<% if(user['imgContentData']=='null') {%>
+											<img src="assets/img/<%=user['imgname']%>.jpg" id="userphoto" class="img-responsive displayed" alt="">
+											<% }else {%>
+											<img src="<%= user['imgContentData'] %>" id="userphoto" class="img-responsive" alt="">
+											<% } %>
                     </a>
                 </div>
                 <div id="idname-div">
@@ -85,9 +89,13 @@
           				      <span class="icon-bar"></span>
           				      <span class="icon-bar"></span>
                       </button>
-                      <a href="/" class="navbar-brand logo">P</a>
+                      <a href="/member" class="navbar-brand logo">P</a>
                       <div id="navbar-userphoto-div" class="visible-xs">
-													<img src="assets/img/<%=user['imgname']%>.jpg" id="navbar-userphoto" class="img-responsive displayed">
+													<% if(user['imgContentData']=='null') {%>
+													<img src="assets/img/<%=user['imgname']%>.jpg" id="navbar-userphoto" class="img-responsive displayed" alt="">
+													<% }else {%>
+													<img src="<%= user['imgContentData'] %>" id="navbar-userphoto" class="img-responsive" alt="">
+													<% } %>
                       </div>
           <!--xs的還是不要顯示名字好了
                       <div id="navbar-idname-div" class="visible-xs">
@@ -128,24 +136,31 @@
                 <div class="padding">
                     <div class="full col-sm-9">
                         <!-- content -->
-                      	<div class="row">
+                      	<div class="row grid">
 													<% if (userpost.length){ %>
 														<% userpost.forEach(function(userpost){ %>
 
-	                         <div class="col-sm-4">
+	                         <div class="col-sm-4 grid-item">
 	                              <div class="panel panel-default">
 	                                <div class="panel-thumbnail">
-																		<img src="data:image/png;base64,<%=userpost['imgContentData'] %>" class="img-responsive" alt="">
+																		<img src="data:image/png;base64,<%=userpost['imgContentData'] %>" class="img-responsive margin-center" alt="">
+																	</div>
+																	<div class="panel-body-name">
+																		<div class= "row panel-body-margin-bottom">
+																			<div>
+																				<% if(userpost.userid['imgContentData']=='null') {%>
+																				<img src="assets/img/<%=userpost.userid['imgname']%>.jpg" class="post-userimg displayed" alt="">
+																				<% }else {%>
+																				<img src="<%= userpost.userid['imgContentData'] %>" class="post-userimg" alt="">
+																				<% } %>
+																			</div>
+																			<div class="post-user-name">
+																				<p ><%= userpost.userid['idname'] %></p>
+																			</div>
+																		</div>
 																	</div>
 	                                <div class="panel-body">
-	                                    <p ><%= userpost['postcontent'] %></p>
-
-
-	                                    <img src="https://lh3.googleusercontent.com/uFp_tsTJboUY7kue5XAsGA=s28" width="28px" height="28px">
-																			<div>
-																				<p ><%= userpost['userid'] %></p>
-																			</div>
-
+		                                <p ><%= userpost['postcontent'] %></p>
 	                                </div>
 	                              </div>
 	                          </div>
@@ -170,28 +185,53 @@
 					<i class="fa fa-pencil-square-o" aria-hidden="true"></i><span class="edit-title">編輯你的個人資料</span>
 				</div>
 				<div class="modal-body">
-					<form class="form center-block">
+					<form id="edit-person-form" class="form center-block" method="put" enctype="multipart/form-data">
 						<div class="form-group">
+							<!--edit photo-->
+							<div class= "row form-row-magin">
+								<div id="edit-userphoto-div" class= "margin-center">
+									<% if(user['imgContentData']=='null') {%>
+									<img src="assets/img/<%=user['imgname']%>.jpg" class="img-responsive displayed margin-center" alt="">
+									<% }else {%>
+									<img src="<%= user['imgContentData'] %>" class="img-responsive margin-center" alt="">
+									<% } %>
+								</div>
+							</div>
 							<!--edit name-->
 							<div class="row form-row-magin">
-								<div class="col-sm-2 text-align-ceenter">
-									<h4>名字</h4>
+								<div class="col-xs-3 col-sm-3 text-align-ceenter">
+									<h5>修改名字</h5>
 								</div>
-								<div class="col-sm-7">
-							  	<input type="text" class="edit-name form-control input-lg" placeholder="your name">
+								<div class="col-xs-9 col-sm-6">
+							  	<input id="edit-idname" type="text" class="edit-name form-control input-lg" value="<%= user['idname'] %>">
 								</div>
 								<div class="col-sm-3 text-align-ceenter">
-									<p class="ajax-message">ajax message</p>
+									<p id="update-err" class="ajax-message"><%= update_message %></p>
+								</div>
+							</div>
+							<div class="row form-row-magin">
+								<div class="col-xs-3 col-sm-3 text-align-ceenter">
+									<h5>更新大頭貼</h5>
+								</div>
+								<div class="col-xs-9 col-sm-6 margin-center">
+									<div class="image-upload pull-left list-inline">
+										<label for="edit-img-input">
+											<i class="fa fa-file-image-o fa-2x" aria-hidden="true">  <span id="edit-img-name" class="itag-img">選擇一張照片</span></i>
+				    				</label>
+				    				<input id="edit-img-input" type="file" name="userPhoto" onchange="changeFileName();"/>
+									</div>
+								</div>
+
+							</div>
+						</div>
+						<div class="modal-footer">
+							<div class="row">
+								<div class="col-sm-2 col-xs-12 float-right">
+									<a onclick="submitUser();" class="btn btn-primary btn-sm btn-block" href="javascript:{}">Submit</a>
 								</div>
 							</div>
 						</div>
 					</form>
-				</div>
-				<div class="modal-footer">
-					<div>
-						<button class="btn btn-primary btn-sm" data-dismiss="modal" aria-hidden="true">Submit</button>
-						<ul class="pull-left list-inline"><li><a href=""><i class="glyphicon glyphicon-upload"></i></a></li><li><a href=""><i class="glyphicon glyphicon-camera"></i></a></li><li><a href=""><i class="glyphicon glyphicon-map-marker"></i></a></li></ul>
-					</div>
 				</div>
 			</div>
 		</div>
@@ -210,7 +250,13 @@
 	      <div class="modal-body">
 
 	            <div class="form-group">
-	              <textarea id="content_input" name="postcontent" type="text" class="form-control input-lg"placeholder="What do you want to share?"></textarea>
+	              <textarea id="content_input" name="postcontent" type="text" class="form-control input-lg" rows="4" placeholder="What do you want to share?"></textarea>
+								<div class="row">
+									<div id="post-img-div" class="img-hover display-none col-sm-7 col-xs-7">
+										<img id="output-img-preview" class="img-responsive margin-center"/>
+										<button id="delete-btn" type="button" class="btn-img-delete close">×</button>
+									</div>
+								</div>
 	            </div>
 
 	      </div>
@@ -218,9 +264,9 @@
 	          <div>
 							<div class="image-upload pull-left list-inline">
 								<label for="img-input">
-		        			<i class="fa fa-picture-o" aria-hidden="true"></i>
+		        			<i class="fa fa-picture-o" aria-hidden="true">  <span id="post-img-name">選擇一張照片</span></i>
 		    				</label>
-		    				<input id="img-input" type="file" name="userPhoto"/>
+		    				<input id="img-input" type="file" name="userPhoto" onchange="changeFileName1();"/>
 							</div>
 		          <button onclick="document.getElementById('post_form').submit();" type="submit" value="Upload userpost" class="btn btn-primary btn-sm" data-dismiss="modal" aria-hidden="true">Post</button>
 
@@ -234,6 +280,10 @@
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
 		<script src="assets/js/bootstrap.min.js"></script>
     <script src="assets/js/custom.js"></script>
+		<!--masonry-->
+		<script src="https://npmcdn.com/masonry-layout@4.0/dist/masonry.pkgd.min.js"></script>
 		<script src="assets/js/scripts.js"></script>
+		<!-- AJAX -->
+	  <script type="text/javascript" src="assets/js/ajax.js"></script>
 	</body>
 </html>

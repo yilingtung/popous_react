@@ -5,7 +5,9 @@ var personSchema = new Schema({
   idname : String,
   username : String,
   password  : String,
-  imgname :String
+  imgname :String,
+  imgContentData: Buffer,
+  imgContentType: String
 
 },{ collection: 'userinfo' });
 personSchema.methods.validPassword = function( pwd ) {

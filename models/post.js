@@ -1,10 +1,14 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var postSchema = new Schema({
-  userid : String,
+  userid : {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Person'
+  },
   postcontent : String,
   imgContentData: Buffer,
-  imgContentType: String
+  imgContentType: String,
+  updateTime : String
 
 },{ collection: 'userpost' });
 

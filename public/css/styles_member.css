@@ -1,3 +1,50 @@
+.panel-body-margin-bottom{
+  margin-bottom: -5px;
+}
+.panel-body-name{
+  padding: 0 15px 0 15px;
+  border-bottom: 1px solid #e5e5e5;
+  background-color: #f2f2f2;
+}
+.post-userimg{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  float: left;
+}
+.post-user-name{
+  float: left;
+  font-weight: 600;
+}
+.post-user-name>p{
+  margin: 14px;
+}
+
+div.img-hover:hover img{
+    opacity:0.5;
+}
+div.img-hover:hover button {
+    display: block;
+}
+div.img-hover button {
+    position:absolute;
+    display:none;
+}
+.btn-img-delete{
+  top: 30px;
+  right: 30px;
+  opacity: .6;
+}
+.btn-img-delete:hover{
+  opacity: .9;
+}
+.display-none{
+  display: none;
+}
+.margin-center{
+  margin-left: auto;
+  margin-right: auto;
+}
 .image-upload > input
 {
     display: none;
@@ -8,8 +55,27 @@
 .edit-name{
 
 }
+.itag-img{
+  font-size: 16px;
+}
+.image-upload:hover i{
+  color: #4EAFCD;
+}
+#edit-userphoto-div{
+  width: 40%;
+}
+.img-div-style{
+  border-style: solid;
+  border-color: #f2f2f2;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  margin-left: 15px;
+}
+.float-right{
+  float: right;
+}
 .form-row-magin{
-  margin-top: 10px;
+  margin-top: 20px;
 }
 span.roll {
   background:url(../img/mag.png) center 90% no-repeat #000;

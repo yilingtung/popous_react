@@ -3,6 +3,7 @@ var express = require('express'),
     index = require('../controllers/index'),
     member = require('../controllers/member'),
     post = require('../controllers/post'),
+    update = require('../controllers/update'),
     router  = express.Router();
 
 router.route('/').get(function(req, res) {
@@ -13,7 +14,8 @@ router.route('/').get(function(req, res) {
 
 router.route('/signup').post(person);
 
-router.route('/member').get(member);
+router.route('/member').get(member)
+                       .put(update);
 
 router.route('/post').post(post);
 

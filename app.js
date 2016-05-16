@@ -77,6 +77,7 @@ app.post('/login', passport.authenticate('local', {
 }),
 function(req, res) {
   //Login success function
+  req.session.idname = req.user.idname;
   req.session._id = req.user.id;
   console.log(req.user.id);
   res.redirect('/member');

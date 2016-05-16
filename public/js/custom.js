@@ -3,7 +3,7 @@ $(function() {
   $(".roll").css("opacity","0");
   // ON MOUSE OVER
   $(".roll").hover(function () {
-    // SET OPACITY TO 70%
+    // SET OPACITY TO 30%
     $(this).stop().animate({opacity: .3}, "slow");
   },
   // ON MOUSE OUT

@@ -10,3 +10,22 @@ $('[data-toggle=offcanvas]').click(function() {
     $('#btnShow').toggle();
 });
 });
+
+var $grid = $('.grid').masonry({
+  // options
+  itemSelector: '.grid-item',
+  columnWidth: 0
+});
+
+var grid;
+function resize(){
+  var w = window.outerWidth;
+  if( w < 768 ){
+    grid = document.getElementsByClassName("grid-item");
+    $(grid).removeClass("grid-item");
+    setTimeout(function(){
+      $grid.masonry('layout');
+    } ,1000);
+
+  }
+}
