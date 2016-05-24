@@ -10,7 +10,6 @@ module.exports = function(req, res, next) {
     console.log(req.session._id);
     Post.find({}).populate('userid').exec(function(err, posts){
       if (err) throw err;
-      console.log(posts[0].userid.idname);
       res.render('member', {
         user : user,
         userpost :posts,
