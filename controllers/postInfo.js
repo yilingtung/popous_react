@@ -5,10 +5,10 @@ module.exports = function(req, res, next) {
       if (err) throw err;
       for(index = 0 ; posts.length>index; index++ ){
         if(posts[index].imgContentData != null){
-          const buf = new Buffer(posts[index].imgContentData);
+          var buf = new Buffer(posts[index].imgContentData);
           posts[index].imgContentType = buf.toString();
         }
-          const buff = new Buffer(posts[index].userid.imgContentData);
+          var buff = new Buffer(posts[index].userid.imgContentData);
           posts[index].userid.imgContentType = buff.toString();
       }
       posts.sort(function(a,b){
