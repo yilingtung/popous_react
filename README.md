@@ -4,6 +4,12 @@
 >  * 使用 node.js , react , react-router<br />
 <a href="https://popous.herokuapp.com">![Alt text](/public/img/popous.png)</a><br />
 
+># 如何使用
+>1.  註冊新帳號/登入
+>2.  泡杯咖啡,小睡一下(資料載入中...)
+>3.  點擊"Post"發布文章/編輯個人資料
+>4.  再泡杯咖啡,小睡一下(資料載入中...)
+
 >## 功能
 >  * 建立帳號<br />
 >  * 變更個人資料<br />
