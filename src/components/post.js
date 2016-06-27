@@ -40,6 +40,12 @@ export default class Post extends Component{
         };
         console.log(textarea.value.toString());
         console.log(d.getTime().toString());
+
+        xhttp.onreadystatechange = function () {
+          if(xhttp.readyState == 4 && xhttp.status == 200){
+            window.location.href = "/member";
+          }
+        }
         xhttp.open("POST", "/post");
         xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
         xhttp.send(JSON.stringify(newPost));
@@ -53,6 +59,12 @@ export default class Post extends Component{
           };
           console.log(textarea.value.toString());
           console.log(d.getTime().toString());
+
+          xhttp.onreadystatechange = function () {
+            if(xhttp.readyState == 4 && xhttp.status == 200){
+              window.location.href = "/member";
+            }
+          }
           xhttp.open("POST", "/post");
           xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
           xhttp.send(JSON.stringify(newPost));

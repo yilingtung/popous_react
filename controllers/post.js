@@ -20,6 +20,6 @@ module.exports = function(req, res, next) {
     post.save(function(err){
   		if (err) throw err;
   		console.log('post saved!');
-      res.redirect('/member');
+      res.json({m: 1});
     });
 };
