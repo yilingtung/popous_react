@@ -2,7 +2,7 @@
 >藉由文章或照片的分享,讓大家的生活串連起來<br />
 >Popous：<a href="https://popous.herokuapp.com">https://popous.herokuapp.com</a>
 >  * 使用 node.js , react , react-router<br />
-<a target="_blank" href="https://popous.herokuapp.com">![Alt text](/public/img/popous.png)</a><br />
+<a href="https://popous.herokuapp.com">![Alt text](/public/img/popous.png)</a><br />
 
 >## 功能
 >  * 建立帳號<br />
