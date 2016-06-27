@@ -23,7 +23,7 @@ export default class Content extends Component{
         });
         this.setState({posts:object});
         fromPost += count;
-
+        document.getElementById('loading').style.display = "none";
       }
     }
     xhttp.open("GET","/post?from=" + fromPost + "&count=" + count);
@@ -33,6 +33,8 @@ export default class Content extends Component{
     return(
       <div className="padding">
           <div className="full col-sm-9">
+            <h5 id="loading"> Loading... <i className="fa fa-spinner fa-spin fa-3x fa-fw"></i></h5>
+
             <Masonry
               className={'my-gallery-class'} // default ''
               elementType={'div'} // default 'div'
