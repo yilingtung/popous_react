@@ -8,14 +8,7 @@ module.exports = function(req, res, next) {
   Person.findOne({_id : req.session._id}, function(err, user) {
 		if (err) throw err;
     console.log(req.session._id);
-    Post.find({}).populate('userid').exec(function(err, posts){
-      if (err) throw err;
-      res.render('member', {
-        user : user,
-        userpost :posts,
-        update_message : null
-      });
-    });
+    res.redirect('/#/member');
 
 
       /*

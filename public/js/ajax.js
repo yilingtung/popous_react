@@ -1,3 +1,29 @@
+$.extend({
+  getUrlVars: function(){
+    var vars = [], hash;
+    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+    for(var i = 0; i < hashes.length; i++)
+    {
+      hash = hashes[i].split('=');
+      vars.push(hash[0]);
+      vars[hash[0]] = hash[1];
+    }
+    return vars;
+  },
+  getUrlVar: function(name){
+    return $.getUrlVars()[name];
+  }
+});
+
+// Error message
+var error = $.getUrlVar('login_error');
+if(error == '1'){
+  document.getElementById('login-err').innerHTML = "帳號或密碼錯誤";
+  history.pushState({}, null, window.location.href.split('?')[0]);
+}
+
+//
+
 // Signup User Active
 var signup_active = function(){
 

@@ -1,3 +1,22 @@
+.display-none{
+  display: none;
+}
+.display-block{
+	display: block;
+}
+#invisible-div{
+	z-index: 2;
+	position: absolute;
+  height: 100vh;
+	width: 100vw;
+}
+.text-align-center{
+	text-align: center;
+}
+.btn-style{
+	display: block;
+	width: 100%;
+}
 * {
 box-sizing: border-box;
 }
@@ -45,7 +64,6 @@ text-align: center;
 background-color: #ECF0F1;
 border: 2px solid transparent;
 border-radius: 3px;
-font-size: 16px;
 font-weight: 200;
 padding: 10px 0;
 width: 80%;
@@ -58,24 +76,19 @@ box-shadow: none;
 }
 
 .btn {
-  border: 2px solid transparent;
-  background-color: #7ec8b9;
   color: #ffffff;
-  font-size: 16px;
-  line-height: 25px;
-  padding: 10px 0;
+  font-size: 14px;
+  line-height: 1.42857143;
+  padding: 6px 12px;
   text-decoration: none;
   text-shadow: none;
-  border-radius: 3px;
+  border-radius: 4px;
   box-shadow: none;
   transition: 0.25s;
   display: block;
-  width: 250px;
   margin: 0 auto;
 }
-.btn:hover {
-  background-color: #5482ab;
-}
+
 .switch-btn-div{
 	position: absolute;
   height: 34px;
@@ -111,7 +124,7 @@ box-shadow: none;
   height: 100%;
 	background-color: #334858;
   background-size: cover;
-
+	z-index: 3;
 }
 #signup-err{
 	color: #e03838;
@@ -151,7 +164,6 @@ box-shadow: none;
   font-size: 16px;
   font-weight: 200;
   padding: 10px 0;
-  width: 80%;
   transition: border .5s;
 }
 .signup-btn{

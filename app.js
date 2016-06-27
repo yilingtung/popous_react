@@ -1,3 +1,9 @@
+var path = require('path');
+var webpack = require('webpack');
+var webpackMiddleware = require('webpack-dev-middleware');
+var config = require('./webpack.config.js');
+var compiler = webpack(config);
+
 var express = require('express');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
@@ -9,9 +15,10 @@ var routers = require('./routers/index');
 var app = express();
 var port = process.env.PORT || 3000;
 app.use('/assets', express.static(__dirname + '/public'));
-app.set('view engine', 'ejs');
-app.use(bodyParser.urlencoded({extended: true}));
-
+app.use(webpackMiddleware(compiler));
+//app.set('view engine', 'ejs');
+app.use(bodyParser.urlencoded({extended: true , limit: '50mb'}));
+app.use(bodyParser.json({limit: '50mb'}));
 app.use( session({
   saveUninitialized : true,
   secret : 'Some Secret' ,
@@ -65,13 +72,10 @@ passport.deserializeUser( function(user, done) {
 
 
 
-app.get('/', function(req, res) {
-  var error = req.flash('error')[0];
-  res.render('index', {login_message : error});
-});
+
 
 app.post('/login', passport.authenticate('local', {
-  failureRedirect: '/',
+  failureRedirect: '/#/?login_error=1&',
   successFlash: 'Welcome!',
   failureFlash: '帳號或密碼錯誤'
 }),

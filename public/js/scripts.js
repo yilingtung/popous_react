@@ -20,9 +20,14 @@ var $grid = $('.grid').masonry({
 var grid;
 function resize(){
   var w = window.outerWidth;
+  var $grid = $('.my-gallery-class').masonry({
+    // options
+    itemSelector: '.image-element-class',
+    columnWidth: 0
+  });
   if( w < 768 ){
-    grid = document.getElementsByClassName("grid-item");
-    $(grid).removeClass("grid-item");
+    grid = document.getElementsByClassName("image-element-class");
+    $(grid).removeClass("image-element-class");
     setTimeout(function(){
       $grid.masonry('layout');
     } ,1000);
